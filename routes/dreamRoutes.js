@@ -6,17 +6,68 @@ const router = express.Router();
 
 router.route('/')
   .get((req, res) => {
-    Dream.find({})
-    .then((data) => {
-      res.json(data);
-    })
-    .catch(err => res.send(err));
+    // Pagination rules
+    const page = req.query.page;
+    const limit = req.query.limit;
+
+    // Search options
+    const type = req.query.type;
+
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+
+    // If search is not used getting all dreams else querying the options
+    if (type === undefined) {
+      Dream.find({})
+      .then((data) => {
+        res.json(data);
+      })
+      .catch(err => res.send(err));
+    } else {
+      Dream.find({
+        type: {
+          $regex: type,
+          $options: '$i'
+        }
+      }).then((data) => {
+        // Applying pagination
+        if (page !== undefined && limit !== undefined) {
+          let pageParsed = parseInt(page);
+          let limitParsed = parseInt(limit);
+
+          let results = {};
+          let dataWithPagination = {};
+
+          // Checking if we have more pages
+          if (endIndex < data.length){
+            dataWithPagination.next = {
+              page: pageParsed + 1,
+              limit: limitParsed
+            }
+          }
+
+          // Checking if we reached first page
+          if (startIndex > 0) {
+            dataWithPagination.previous = {
+              page: pageParsed - 1,
+              limit: limitParsed
+            }
+          }
+
+          dataWithPagination.results = data.slice(startIndex, endIndex);
+          res.json(dataWithPagination);
+        } else {     
+          res.json(data);
+        }
+      })
+    }
+    
   })
   .post((req, res) => {
     const newDream = new Dream({
       title: req.body.title,
       description: req.body.description,
-      date: moment().format('MM DD YYYY'),
+      date: moment().format('MM/DD/YYYY'),
       type: req.body.type
     });
     
