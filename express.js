@@ -1,8 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const arrayOfDreamTypes = require('./helpers/dreamTypes');
+const dreamRoutes = require('./routes/dreamRoutes');
 
 const app = express();
+
+// Middleware
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json());
 
 // Connection to a db
 const dbConnect = 'mongodb+srv://test:test12345@clusterfirst.2gqqe.mongodb.net/dream-api';
@@ -21,3 +26,6 @@ app.get('/dreamTypes', (req, res) => {
   console.log('dreaming sad or happy dreams?');
   res.json(arrayOfDreamTypes);
 });
+
+// Routes
+app.use('/dreams',dreamRoutes);
