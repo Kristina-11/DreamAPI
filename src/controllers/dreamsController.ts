@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import moment from 'moment';
 const Dream = require('../models/Dream');
-const enumDreamTypes = require('../helpers/enumDreamTypes');
 
 // Methods for /dreams Get, Post and Delete
 export const dreams_getAll = (req: Request, res: Response) => {
@@ -15,7 +13,6 @@ export const dreams_postAll = (req: Request, res: Response) => {
     description: req.body.description,
     date: req.body.date,
     type: req.body.type,
-    timestamp: moment().format('MM/DD/YYYY')
   });
 
   // Saving newDream to a db
@@ -26,8 +23,11 @@ export const dreams_postAll = (req: Request, res: Response) => {
     .catch((err: unknown) => res.send(err));
 }
 
+// Deleting all dreams
 export const dreams_deleteAll = (req: Request, res: Response) => {
-  res.json('Deleting all dreams');
+  Dream.deleteMany({})
+    .then(() => res.send('Deleted All Dreams'))
+    .catch((err: unknown) => res.send(err));
 }
 
 // Methods for specific dream

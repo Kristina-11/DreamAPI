@@ -1,12 +1,11 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
-const dreamSchema = new mongoose.Schema({
+const dreamSchema: Schema = new Schema({
   title: String,
   description: String,
   date: String,
-  type: Number,
-  timestamp: String
-});
+  type: String
+}, { timestamps: true });
 
 const Dream = mongoose.model('Dream', dreamSchema);
 
