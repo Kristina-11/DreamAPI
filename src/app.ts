@@ -30,8 +30,8 @@ mongoose.connect(dbConnect, {
 // Getting dream types values in array
 app.get('/dreamTypes', (req: Request, res: Response) => {
   console.log('dreaming sad or happy dreams?');
-
   let dreamTypesArr: string[] = [];
+  
   for(let i in enumDreamTypes) {
     if(typeof enumDreamTypes[i] === 'number') {
       dreamTypesArr.push(i);
