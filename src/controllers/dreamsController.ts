@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { enumDreamTypes } from '../helpers/enumDreamTypes';
 const Dream = require('../models/Dream');
 
 // Methods for /dreams Get, Post and Delete
@@ -10,11 +11,31 @@ export const dreams_getAll = (req: Request, res: Response) => {
 
 // Post a dream to a db
 export const dreams_postAll = (req: Request, res: Response) => {
+  let typeIndex: number = 0;
+  
+  switch(req.body.type) {
+    case 'happy':
+       typeIndex = enumDreamTypes.happy;
+      break;
+
+    case 'sad':
+       typeIndex = enumDreamTypes.sad;
+      break;
+
+    case 'exciting':
+       typeIndex = enumDreamTypes.exciting;
+      break;
+
+    case 'scary':
+       typeIndex = enumDreamTypes.scary;
+      break;
+  }
+
   const newDream = new Dream({
     title: req.body.title,
     description: req.body.description,
     date: req.body.date,
-    type: req.body.type,
+    type: typeIndex,
   });
 
   // Saving newDream to a db
