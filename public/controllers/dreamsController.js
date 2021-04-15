@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dreams_deleteOne = exports.dreams_patchOne = exports.dreams_getOne = exports.dreams_deleteAll = exports.dreams_postAll = exports.dreams_getAll = void 0;
+const enumDreamTypes_1 = require("../helpers/enumDreamTypes");
 const Dream = require('../models/Dream');
 // Methods for /dreams Get, Post and Delete
 const dreams_getAll = (req, res) => {
@@ -11,11 +12,26 @@ const dreams_getAll = (req, res) => {
 exports.dreams_getAll = dreams_getAll;
 // Post a dream to a db
 const dreams_postAll = (req, res) => {
+    let typeIndex = 0;
+    switch (req.body.type) {
+        case 'happy':
+            typeIndex = enumDreamTypes_1.enumDreamTypes.happy;
+            break;
+        case 'sad':
+            typeIndex = enumDreamTypes_1.enumDreamTypes.sad;
+            break;
+        case 'exciting':
+            typeIndex = enumDreamTypes_1.enumDreamTypes.exciting;
+            break;
+        case 'scary':
+            typeIndex = enumDreamTypes_1.enumDreamTypes.scary;
+            break;
+    }
     const newDream = new Dream({
         title: req.body.title,
         description: req.body.description,
         date: req.body.date,
-        type: req.body.type,
+        type: typeIndex,
     });
     // Saving newDream to a db
     newDream.save()

@@ -24,7 +24,7 @@ const dreamSchema = new mongoose_1.Schema({
     title: String,
     description: String,
     date: String,
-    type: String
+    type: Number
 }, { timestamps: true });
 const Dream = mongoose_1.default.model('Dream', dreamSchema);
 module.exports = Dream;
