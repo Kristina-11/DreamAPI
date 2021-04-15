@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 import { enumDreamTypes } from './helpers/enumDreamTypes';
+const dreamRoutes = require('./routes/dreamRoutes');
 
 const app = express();
 dotenv.config();
@@ -39,3 +40,6 @@ app.get('/dreamTypes', (req: Request, res: Response) => {
 
   res.send(dreamTypesArr);
 });
+
+// Routes
+app.use('/dreams', dreamRoutes);
