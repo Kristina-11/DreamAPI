@@ -54,5 +54,9 @@ export const dreams_patchOne = (req: Request, res: Response) => {
 
 // Deleting one dream
 export const dreams_deleteOne = (req: Request, res: Response) => {
-  res.json('Deleting one dream');
+  const id: string = req.params.id;
+
+  Dream.deleteOne({ _id: id })
+    .then((data: unknown) => { res.status(200).send({ data: data, message: 'Successfully deleted a dream!'})})
+    .catch((err: unknown) => res.status(500).send({ message: 'Failed to delete a dream!', error: err }));
 }
