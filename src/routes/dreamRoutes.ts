@@ -3,9 +3,9 @@ import {
   dreams_deleteAll,
   dreams_getAll, 
   dreams_postAll, 
-  dreams_get, 
-  dreams_patch, 
-  dreams_delete } from '../controllers/dreamsController';
+  dreams_getOne, 
+  dreams_patchOne, 
+  dreams_deleteOne } from '../controllers/dreamsController';
 
 const router = express.Router();
 
@@ -17,8 +17,8 @@ router.route('/')
 
 // Get, Patch, Delete for specific dream
 router.route('/:id')
-  .get(dreams_get)
-  .patch(dreams_patch)
-  .delete(dreams_delete);
+  .get(dreams_getOne)
+  .patch(dreams_patchOne)
+  .delete(dreams_deleteOne);
 
 module.exports = router;

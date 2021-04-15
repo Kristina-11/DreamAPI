@@ -34,17 +34,21 @@ export const dreams_deleteAll = (req: Request, res: Response) => {
 
 // Methods for specific dream
 // Getting one dream
-export const dreams_get = (req: Request, res: Response) => {
-  res.json('Getting one dream');
+export const dreams_getOne = (req: Request, res: Response) => {
+  const id: string = req.params.id;
+
+  Dream.findOne({ _id: id })
+    .then((data: unknown) => { res.status(200).send(data); })
+    .catch((err: unknown) => res.status(500).send({message: 'Dream not found!', error: err}));
 }
 
 
 // Updating one dream
-export const dreams_patch = (req: Request, res: Response) => {
-  res.json('Updating one dream');
+export const dreams_patchOne = (req: Request, res: Response) => {
+  
 }
 
 // Deleting one dream
-export const dreams_delete = (req: Request, res: Response) => {
+export const dreams_deleteOne = (req: Request, res: Response) => {
   res.json('Deleting one dream');
 }
