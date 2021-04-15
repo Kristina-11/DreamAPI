@@ -45,7 +45,11 @@ export const dreams_getOne = (req: Request, res: Response) => {
 
 // Updating one dream
 export const dreams_patchOne = (req: Request, res: Response) => {
-  
+  const id: string = req.params.id;
+
+  Dream.updateOne({ _id: id }, { $set: req.body })
+    .then((data: unknown) => { res.status(200).send({data: data, message: 'Updated a dream'}) })
+    .catch((err: unknown) => res.status(500).send({message: 'Failed to update a dream!', error: err}));
 }
 
 // Deleting one dream
