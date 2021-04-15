@@ -1,6 +1,6 @@
 const express = require('express');
 const moment = require('moment');
-const Dream = require('./models/Dream');
+const Dream = require('./Dream');
 
 const router = express.Router();
 

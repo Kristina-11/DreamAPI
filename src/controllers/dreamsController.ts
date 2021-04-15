@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+const Dream = require('../models/Dream');
 
 // Methods for /dreams Get, Post and Delete
 export const dreams_getAll = (req: Request, res: Response) => {
@@ -6,7 +7,7 @@ export const dreams_getAll = (req: Request, res: Response) => {
 }
 
 export const dreams_postAll = (req: Request, res: Response) => {
-  res.json('Posting all dreams');
+  res.json('Posting...');
 }
 
 export const dreams_deleteAll = (req: Request, res: Response) => {
