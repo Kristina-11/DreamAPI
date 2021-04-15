@@ -15,7 +15,7 @@ app.use(express.json());
 
 // Connection to a db
 const port: number | string = process.env.PORT || 8080;
-const dbConnect: string = `mongodb+srv://${process.env.DB_CONNECTION}`;
+const dbConnect: string = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}`;
 
 mongoose.connect(dbConnect, {
   useNewUrlParser: true,

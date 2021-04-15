@@ -8,6 +8,7 @@ export const dreams_getAll = (req: Request, res: Response) => {
   res.json('Getting all dreams');
 }
 
+// Post a dream to a db
 export const dreams_postAll = (req: Request, res: Response) => {
   const newDream = new Dream({
     title: req.body.title,
