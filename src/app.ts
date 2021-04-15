@@ -3,7 +3,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
-import { dreamTypes } from './helpers/dreamTypes';
+import { enumDreamTypes } from './helpers/enumDreamTypes';
 
 const app = express();
 dotenv.config();
@@ -27,12 +27,12 @@ mongoose.connect(dbConnect, {
 })
 
 // Getting dream types values in array
-app.get('/dreamTypes', (req: Request, res: Response) : void => {
+app.get('/dreamTypes', (req: Request, res: Response) => {
   console.log('dreaming sad or happy dreams?');
 
   let dreamTypesArr: string[] = [];
-  for(let i in dreamTypes) {
-    if(typeof dreamTypes[i] === 'number') {
+  for(let i in enumDreamTypes) {
+    if(typeof enumDreamTypes[i] === 'number') {
       dreamTypesArr.push(i);
     }
   }

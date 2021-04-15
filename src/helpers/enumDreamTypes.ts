@@ -1,4 +1,4 @@
-export enum dreamTypes {
+export enum enumDreamTypes {
   happy,
   sad,
   exciting,
