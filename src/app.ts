@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json());
 
 // Connection to a db
-const port: number | string = 3000;
+const port: number | string = process.env.PORT || 3000;
 const dbConnect: string = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}`;
 
 mongoose.connect(dbConnect, {
