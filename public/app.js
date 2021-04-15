@@ -14,7 +14,7 @@ dotenv_1.default.config();
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use(express_1.default.json());
 // Connection to a db
-const port = 3000;
+const port = process.env.PORT || 3000;
 const dbConnect = `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@${process.env.MONGO_HOST}`;
 mongoose_1.default.connect(dbConnect, {
     useNewUrlParser: true,
