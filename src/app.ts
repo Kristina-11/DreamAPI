@@ -2,9 +2,11 @@ import { Request, Response, NextFunction } from 'express';
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import logging from './config/logging';
 
 import { enumDreamTypes } from './helpers/enumDreamTypes';
 const dreamRoutes = require('./routes/dreamRoutes');
+const namespace = 'App';
 
 const app = express();
 dotenv.config();
@@ -21,15 +23,15 @@ mongoose.connect(dbConnect, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then((res) => {
-  console.log('Connected to dreams');
   app.listen(port);
+  logging.info(namespace, 'Connected to dreams');
 }).catch(err => {
-  console.log(err);
+  logging.error(namespace, err.message, err);
 })
 
 // Getting dream types values in array
 app.get('/dreamTypes', (req: Request, res: Response) => {
-  console.log('dreaming sad or happy dreams?');
+  logging.info(namespace, 'Dreaming happy dreams?');
   let dreamTypesArr: string[] = [];
   
   for(let i in enumDreamTypes) {
